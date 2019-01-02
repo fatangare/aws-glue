@@ -19,9 +19,10 @@ Glue shows metrics for executors,  RAM memory and CPU usages. But it doesn't sho
 
 5. Reading CSV data 
   a. com.amazonaws.services.glue.util.FatalException: Unable to parse file
-    Glue works with UTF-8 encoded data. If it detects ASCII encoded data, Glue throughs error ' com.amazonaws.services.glue.util.FatalException: Unable to parse file: ' 
+    i. Glue works with UTF-8 encoded data. If it detects ASCII encoded data, Glue throughs error ' com.amazonaws.services.glue.util.FatalException: Unable to parse file: ' 
     I used below command to convert from ASCII to UTF-8. We can use any text editor(Sublime text) to convert the same.
     - iconv -f CP1250 -t UTF-8 < {input-file-ASCII} > {output-file-UTF-8}
+    ii. Pyspark reads data even if it is ASCII coded and there is no issue while using Pyspark read API.
   b. UnicodeEncodeError: 'ascii' codec can't encode character u'\xfc' in position 769: ordinal not in range(128)
   Error may occurs when toDF() method is used after converting ASCII to UTF-8. Following code should fix it:
   import codecs
